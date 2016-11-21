@@ -55,7 +55,7 @@ properties in the returned object_).
 
 - [desiredHeight]: what required height each image is supposed to take. The value will be used to
 calculate the total width of all images given their aspect:
-`const summedWidth = lib.getSummedWidth(aspects, desiredHeight);`
+`const summedWidth = lib.getSummedWidth(aspects, desiredHeight)`
 
 - [requestedRows]: if desiredHeight is not given, static number of rows can be specified using
 this option.
@@ -153,7 +153,7 @@ const outputList1 = photoList
     .map((photo, index) => ({
         url: photo.url,
         class: `s${index}`,
-    }));
+    }))
 /*
 [ { url: '/files/cd24b45a-48c3-4f78-a029-7725128e82ef.jpg',
     class: 's0' },
@@ -169,7 +169,7 @@ const outputList1 = photoList
     class: 's5' } ]
 */
 
-await ctx.render('photos', { css, outputList });
+await ctx.render('photos', { css, outputList })
 ```
 
 _nunjucks_ template:
