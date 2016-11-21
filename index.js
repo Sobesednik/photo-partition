@@ -40,12 +40,12 @@ const linearPartition = require('linear-partitioning');
 function partitions(viewports, photos, desiredHeight, requiredRows) {
     // lib.checkIsArray(viewports);
     const aspects = lib.getAspects(photos);
-    const summedWidth = lib.getSummedWidth(aspects, desiredHeight);
+    const summedWidth = desiredHeight ? lib.getSummedWidth(aspects, desiredHeight) : null;
     const o = {};
 
     Object.keys(viewports).forEach((maxWidth) => {
         const containerWidth = viewports[maxWidth];
-        const rows = lib.getRows(containerWidth, summedWidth);
+        const rows = summedWidth ? lib.getRows(containerWidth, summedWidth) : requiredRows;
         const partitions = linearPartition(aspects, rows);
 
         o[maxWidth] = lib.flattenArray(partitions.map(row =>
