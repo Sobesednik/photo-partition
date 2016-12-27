@@ -19,7 +19,8 @@ function partitions(viewports, photos, desiredHeight, requiredRows) {
     Object.keys(viewports).forEach((maxWidth) => {
         const containerWidth = viewports[maxWidth];
         const rows = summedWidth ? lib.getRows(containerWidth, summedWidth) : requiredRows;
-        const partitions = linearPartition(aspects, rows);
+        const partitions = linearPartition(aspects, rows)
+            .filter(partition => partition.length > 0)
 
         o[maxWidth] = lib.flattenArray(partitions.map(row =>
             lib.assignWidthAndHeightToRow(row, containerWidth)
