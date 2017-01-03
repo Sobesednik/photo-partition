@@ -27,9 +27,10 @@ function calculateAspect(width, height) {
  */
 function getAspects(photos) {
     checkIsArray(photos);
-    return photos.map(photo => (
-        photo.aspect ? photo.aspect : calculateAspect(photo.width, photo.height)
-    ));
+    return photos
+        .map(photo => (
+            photo.aspect ? photo.aspect : calculateAspect(photo.width, photo.height)
+        ));
 }
 
 /**
@@ -49,7 +50,7 @@ function getSummedWidth(aspects, desiredHeight) {
  * @return {Number} Number of rows.
  */
 function getRows(viewportWidth, summedWidth) {
-    return Math.round(summedWidth / viewportWidth);
+    return Math.round(summedWidth / viewportWidth) || 1;
 }
 
 /**
@@ -70,7 +71,8 @@ function checkIsArray(array) {
  */
 function arraySum(array) {
     checkIsArray(array);
-    return array.reduce((sum, element) => sum + element, 0);
+    return array
+        .reduce((sum, element) => sum + element, 0);
 }
 
 /**
