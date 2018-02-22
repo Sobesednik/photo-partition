@@ -222,5 +222,15 @@ _result html_:
 </body>
 ```
 
+## ES5
+
+The package uses some newer language features. For your convenience, it's been
+transpiled to be compatible with older environments. You can use the following
+snippet.
+
+```js
+const partitions = require('photo-partition/es5')
+```
+
 ## Testing
 Module is tested with [zoroaster](https://www.npmjs.com/package/zoroaster): `npm test`.

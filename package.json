@@ -4,7 +4,8 @@
   "description": "A Node module to apply linear partitioning algorithm to a set of photos.",
   "main": "src",
   "scripts": {
-    "test": "zoroaster test"
+    "test": "zoroaster test",
+    "build": "bestie"
   },
   "keywords": [
     "linear partition",
@@ -13,6 +14,7 @@
   "author": "Anton <anton@sobses.io>",
   "license": "MIT",
   "devDependencies": {
+    "bestie": "1.0.0",
     "zoroaster": "0.5.3"
   },
   "dependencies": {
