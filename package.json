@@ -2,7 +2,7 @@
   "name": "photo-partition",
   "version": "0.1.2",
   "description": "A Node module to apply linear partitioning algorithm to a set of photos.",
-  "main": "index.js",
+  "main": "src",
   "scripts": {
     "test": "zoroaster test"
   },
@@ -10,12 +10,12 @@
     "linear partition",
     "photo"
   ],
-  "author": "Anton <anton@sobesednik.media>",
+  "author": "Anton <anton@sobses.io>",
   "license": "MIT",
   "devDependencies": {
-    "zoroaster": "^0.2.0"
+    "zoroaster": "0.5.3"
   },
   "dependencies": {
-    "linear-partitioning": "^0.3.1"
+    "linear-partitioning": "0.3.2"
   }
 }
