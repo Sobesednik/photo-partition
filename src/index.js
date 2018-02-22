@@ -1,9 +1,9 @@
-const lib = require('./lib')
+const { getAspects, getSummedWidth, getRows, flattenArray, assignWidthAndHeightToRow } = require('./lib')
 const linearPartition = require('linear-partitioning')
 
 /**
  * Apply partitions to multiple viewport widths.
- * @param {Array} viewportWidths - an array with required widths
+ * @param {number[]} viewportWidths - an array with required widths
  * @param {Array} photos - an array with photo objects (photo.width, photo.height)
  * @param {Number} desiredHeight - desired height of each photo after partitioning
  * @param {Number} [requiredRows] - required rows if desiredHeight is not specified
@@ -11,20 +11,20 @@ const linearPartition = require('linear-partitioning')
  * containing new widths and heights of photos.
  */
 function partitions(viewports, photos, desiredHeight, requiredRows) {
-  // lib.checkIsArray(viewports);
-  const aspects = lib.getAspects(photos)
-  const summedWidth = desiredHeight ? lib.getSummedWidth(aspects, desiredHeight) : null
-  const o = {}
+  const aspects = getAspects(photos)
+  const summedWidth = desiredHeight ? getSummedWidth(aspects, desiredHeight) : null
 
-  Object.keys(viewports).forEach((maxWidth) => {
+  const o = Object.keys(viewports).reduce((acc, maxWidth) => {
     const containerWidth = viewports[maxWidth]
-    const rows = summedWidth ? lib.getRows(containerWidth, summedWidth) : requiredRows
+    const rows = summedWidth ? getRows(containerWidth, summedWidth) : requiredRows
     const partitions = linearPartition(aspects, rows)
-      .filter(partition => partition.length > 0)
+      .filter(({ length }) => length)
 
-    o[maxWidth] = lib.flattenArray(partitions.map(row =>
-      lib.assignWidthAndHeightToRow(row, containerWidth)
-    ))
+    const assigned = partitions.map(row => assignWidthAndHeightToRow(row, containerWidth))
+    return {
+      ...acc,
+      [maxWidth]: flattenArray(assigned),
+    }
   })
   return o
 }
@@ -53,8 +53,7 @@ function generateMediaQuery(size, photos, prefix) {
 }
 
 function getCSS(partitions, prefix) {
-  const css = Object
-    .keys(partitions)
+  const css = Object.keys(partitions)
     .map(key => generateMediaQuery(key, partitions[key], prefix))
     .join('')
   return css
