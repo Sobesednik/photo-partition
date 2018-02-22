@@ -1,23 +1,23 @@
 function calculateAspect(width, height) {
-    if (width === undefined) {
-        throw new Error('Photo does not have width');
-    }
-    if (width === 0) {
-        throw new Error('Photo has 0 width');
-    }
-    if (width < 0) {
-        throw new Error('Photo has negative width');
-    }
-    if (height === undefined) {
-        throw new Error('Photo does not have height');
-    }
-    if (height === 0) {
-        throw new Error('Photo has 0 height');
-    }
-    if (height < 0) {
-        throw new Error('Photo has negative height');
-    }
-    return width / height;
+  if (width === undefined) {
+    throw new Error('Photo does not have width')
+  }
+  if (width === 0) {
+    throw new Error('Photo has 0 width')
+  }
+  if (width < 0) {
+    throw new Error('Photo has negative width')
+  }
+  if (height === undefined) {
+    throw new Error('Photo does not have height')
+  }
+  if (height === 0) {
+    throw new Error('Photo has 0 height')
+  }
+  if (height < 0) {
+    throw new Error('Photo has negative height')
+  }
+  return width / height
 }
 
 /**
@@ -26,11 +26,11 @@ function calculateAspect(width, height) {
  * @return {Array} An array of aspect ratios.
  */
 function getAspects(photos) {
-    checkIsArray(photos);
-    return photos
-        .map(photo => (
-            photo.aspect ? photo.aspect : calculateAspect(photo.width, photo.height)
-        ));
+  checkIsArray(photos)
+  return photos
+    .map(photo => (
+      photo.aspect ? photo.aspect : calculateAspect(photo.width, photo.height)
+    ))
 }
 
 /**
@@ -40,7 +40,7 @@ function getAspects(photos) {
  * @return {Number} The sum of widths of images resized to the given height.
  */
 function getSummedWidth(aspects, desiredHeight) {
-    return arraySum(aspects) * desiredHeight;
+  return arraySum(aspects) * desiredHeight
 }
 
 /**
@@ -50,7 +50,7 @@ function getSummedWidth(aspects, desiredHeight) {
  * @return {Number} Number of rows.
  */
 function getRows(viewportWidth, summedWidth) {
-    return Math.round(summedWidth / viewportWidth) || 1;
+  return Math.round(summedWidth / viewportWidth) || 1
 }
 
 /**
@@ -59,9 +59,9 @@ function getRows(viewportWidth, summedWidth) {
  * @throws {Error} An error if passed argument is not an array.
  */
 function checkIsArray(array) {
-    if (!Array.isArray(array)) {
-        throw new Error('Argument must be an array');
-    }
+  if (!Array.isArray(array)) {
+    throw new Error('Argument must be an array')
+  }
 }
 
 /**
@@ -70,9 +70,9 @@ function checkIsArray(array) {
  * @return {Number} Sum of elements in the array.
  */
 function arraySum(array) {
-    checkIsArray(array);
-    return array
-        .reduce((sum, element) => sum + element, 0);
+  checkIsArray(array)
+  return array
+    .reduce((sum, element) => sum + element, 0)
 }
 
 /**
@@ -82,19 +82,19 @@ function arraySum(array) {
  * @return {Array} An array with widths.
  */
 function assignWidthAndHeightToRow(row, viewportWidth) {
-    if (viewportWidth === undefined) {
-        throw new Error('Viewport with must be given');
-    }
-    const summedRatios = arraySum(row);
-    const height = Math.round(viewportWidth / summedRatios);
-    const rowMap = row.map(aspect => ({
-        height,
-        width: Math.round(height * aspect),
-    }));
-    const totalNewWidth = rowMap.reduce((acc, photo) => acc + photo.width, 0);
-    const diff = viewportWidth - totalNewWidth;
-    rowMap[rowMap.length - 1].width += diff; // normalise edge cases
-    return rowMap;
+  if (viewportWidth === undefined) {
+    throw new Error('Viewport with must be given')
+  }
+  const summedRatios = arraySum(row)
+  const height = Math.round(viewportWidth / summedRatios)
+  const rowMap = row.map(aspect => ({
+    height,
+    width: Math.round(height * aspect),
+  }))
+  const totalNewWidth = rowMap.reduce((acc, photo) => acc + photo.width, 0)
+  const diff = viewportWidth - totalNewWidth
+  rowMap[rowMap.length - 1].width += diff // normalise edge cases
+  return rowMap
 }
 
 /**
@@ -104,22 +104,22 @@ function assignWidthAndHeightToRow(row, viewportWidth) {
  * @throws {Error} An error if argument is not an array.
  */
 function flattenArray(array) {
-    checkIsArray(array);
-    return array.reduce((prevValue, currentElement) => {
-        currentElement.forEach(element => {
-            prevValue.push(element);
-        });
-        return prevValue;
-    }, []);
+  checkIsArray(array)
+  return array.reduce((prevValue, currentElement) => {
+    currentElement.forEach(element => {
+      prevValue.push(element)
+    })
+    return prevValue
+  }, [])
 }
 
 module.exports = {
-    calculateAspect,
-    getAspects,
-    getSummedWidth,
-    checkIsArray,
-    getRows,
-    assignWidthAndHeightToRow,
-    arraySum,
-    flattenArray,
-};
+  calculateAspect,
+  getAspects,
+  getSummedWidth,
+  checkIsArray,
+  getRows,
+  assignWidthAndHeightToRow,
+  arraySum,
+  flattenArray,
+}

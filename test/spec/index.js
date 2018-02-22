@@ -1,13 +1,13 @@
-const assert = require('assert');
+const assert = require('assert')
 
 const indexTestSuite = { 
-    partitions: () => {
-        assert(true);
-    },
-    getCSS: () => {
-        assert(!undefined);
-    },
-};
+  partitions: () => {
+    assert(true)
+  },
+  getCSS: () => {
+    assert(!undefined)
+  },
+}
 
-module.exports = indexTestSuite;
+module.exports = indexTestSuite
 

@@ -1,14 +1,41 @@
 module.exports = {
-    "extends": "google",
-    "installedESLint": true,
-
-    "rules": {
-        "indent": ["error", 4],
-        "comma-dangle": ["error", "always-multiline"],
-        "arrow-parens": ["error", "as-needed"],
-        "space-before-function-paren": ["error", { "anonymous": "always", "named": "never" }],
-        "object-curly-spacing": ["error", "always"],
-        "max-len": ["error", 100],
-        "max-nested-callbacks": "off",
-    },
+  "env": {
+      "es6": true,
+      "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+  },
+  "rules": {
+      "indent": [
+          "error",
+          2
+      ],
+      "linebreak-style": [
+          "error",
+          "unix"
+      ],
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "semi": [
+          "error",
+          "never"
+      ],
+      "comma-dangle": [
+          "error",
+          "always-multiline"
+      ],
+      "quote-props": [
+          "error",
+          "as-needed"
+      ],
+      "padded-blocks": [
+          "error",
+          "never"
+      ]
+  }
 };
