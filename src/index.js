@@ -7,10 +7,11 @@ const linearPartition = require('linear-partitioning')
  * @param {Array} photos - an array with photo objects (photo.width, photo.height)
  * @param {Number} desiredHeight - desired height of each photo after partitioning
  * @param {Number} [requiredRows] - required rows if desiredHeight is not specified
+ * @param {boolean} [returnRows=false] Return unflattened structure in rows.
  * @return {Object} An object where keys are viewport widths and values are arrays
  * containing new widths and heights of photos.
  */
-function partitions(viewports, photos, desiredHeight, requiredRows) {
+function partitions(viewports, photos, desiredHeight, requiredRows, returnRows = false) {
   const aspects = getAspects(photos)
   const summedWidth = desiredHeight ? getSummedWidth(aspects, desiredHeight) : null
 
@@ -23,9 +24,9 @@ function partitions(viewports, photos, desiredHeight, requiredRows) {
     const assigned = partitions.map(row => assignWidthAndHeightToRow(row, containerWidth))
     return {
       ...acc,
-      [maxWidth]: flattenArray(assigned),
+      [maxWidth]: returnRows ? assigned : flattenArray(assigned),
     }
-  })
+  }, {})
   return o
 }
 
