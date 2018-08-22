@@ -1,6 +1,6 @@
 {
   "name": "photo-partition",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A Node module to apply linear partitioning algorithm to a set of photos.",
   "main": "src",
   "scripts": {
