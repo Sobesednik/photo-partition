@@ -7,6 +7,10 @@
     "test": "zoroaster test",
     "build": "bestie"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sobesednik/photo-partition.git"
+  },
   "keywords": [
     "linear partition",
     "photo"
